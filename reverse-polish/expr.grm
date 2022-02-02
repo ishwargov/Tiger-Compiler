@@ -33,10 +33,9 @@ Operator precedence and associativity. The %left says the operator is
 left associative and the precedence increase as you go down this list.
 
 *)
-
 %left PLUS MINUS  (* + and - are of same precedence *)
-%left MUL     (* higher than + and -            *)
-%left DIV
+%left MUL DIV    (* higher than + and -            *)
+%left OPBRAC CLBRAC
 
 (* The type that captures position in the input *)
 %pos int
