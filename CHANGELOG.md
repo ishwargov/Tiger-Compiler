@@ -1,7 +1,10 @@
 # CHANGELOG
 
 ## LAB 4
--
+- Added Tiger AST
+- Created IR pretty print
+- Temp Variable Allocation (Greedy)
+- Translate from Tiger AST to MIPS AST
 
 ## LAB 3
 - Added MIPS Abstract Syntax Tree
