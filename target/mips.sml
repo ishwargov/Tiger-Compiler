@@ -139,7 +139,7 @@ datatype ('l,'t) Stmt = Instr of ('l,'t) Inst
                       | Word of int list
 
 
-fun prReg r = case r of 
+(* fun prReg r = case r of 
                 Zero => "$zero"
               | GP => "$gp"
               | SP => "$sp"
@@ -148,7 +148,9 @@ fun prReg r = case r of
               | V(x) => "$v"^Int.toString(x)
               | A(x) => "$a"^Int.toString(x)
               | T(x) => "$t"^Int.toString(x)
-              | S(x) => "$s"^Int.toString(x)
+              | S(x) => "$s"^Int.toString(x) *)
+
+fun prReg t = "$t"^Int.toString(t)
 
 datatype Label = UserDefined of string 
                | TempLabel   of int 

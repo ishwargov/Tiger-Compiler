@@ -12,7 +12,6 @@
 - Added Paranthesis features 
 - Added Multiplication and Division 
 
-
 ## LAB 1 
 - Created Makefile, Readme with info.
 - Added a Basic Hello World example in tc.sml.
