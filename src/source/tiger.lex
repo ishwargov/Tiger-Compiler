@@ -67,7 +67,7 @@ alph = [a-zA-Z];
 		 );
 {alph}+       => ( Tokens.VAR  (yytext,!lineRef,!lineRef) );
 ":="          => ( Tokens.ASSIGN  (!lineRef,!lineRef) );
-"print"       => ( Tokens.PRINT (!lineRef,!lineRef)  );
+"print "       => ( Tokens.PRINT (!lineRef,!lineRef)  );
 {digit}+      => ( Tokens.CONST (toInt yytext, !lineRef, !lineRef) );
 "+"           => ( Tokens.PLUS  (!lineRef,!lineRef) );
 "-"           => ( Tokens.MINUS  (!lineRef,!lineRef) );

@@ -49,17 +49,17 @@ left associative and the precedence increase as you go down this list.
 PROGRAM : STMTS                ( STMTS )
 	| STMTS NEWLINE         ( STMTS )
 
-STMTS    : (* empty *)          ( []                  )
-	| STMT NEWLINE STMTS     ( STMT :: STMTS         )
+STMTS    : (* empty *)       ( []                       )
+	| STMT NEWLINE STMTS     ( STMT :: STMTS            )
 
-STMT :  VAR ASSIGN EXP              ( TIGER.Assign(VAR,EXP))
-    | PRINT EXP               (TIGER.Print(EXP))
+STMT :  VAR ASSIGN  EXP       ( TIGER.Assign(VAR,EXP)   )
+    | PRINT EXP               ( TIGER.Print(EXP)         )
 
-EXP     : CONST                ( TIGER.Val(CONST)     )
-    | VAR                       (TIGER.Var(VAR))
+EXP     : CONST            ( TIGER.Val(CONST)           )
+    | VAR                  ( TIGER.Var(VAR)             )
     | OPBRAC EXP CLBRAC    ( EXP )
-    | EXP PLUS EXP         ( TIGER.Exp(EXP1,TIGER.Plus,EXP2) )
-	| EXP MINUS EXP        ( TIGER.Exp(EXP1,TIGER.Minus,EXP2) )
-	| EXP MUL   EXP        ( TIGER.Exp(EXP1,TIGER.Mul,EXP2) )
-    | EXP DIV EXP          ( TIGER.Exp(EXP1,TIGER.Div,EXP2))
+    | EXP PLUS EXP         ( TIGER.Exp(EXP1,TIGER.Plus,EXP2)    )
+	| EXP MINUS EXP        ( TIGER.Exp(EXP1,TIGER.Minus,EXP2)   )
+	| EXP MUL   EXP        ( TIGER.Exp(EXP1,TIGER.Mul,EXP2)     )
+    | EXP DIV EXP          ( TIGER.Exp(EXP1,TIGER.Div,EXP2)     )
    
