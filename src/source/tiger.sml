@@ -5,9 +5,8 @@ struct
                     | Minus
                     | Div
                     | Mul
-                    | And
 
-    datatype Exp =    Val of Int
+    datatype Exp =    Val of int
                     | Var of string
                     | Exp of Exp * Binop * Exp
 
@@ -15,6 +14,5 @@ struct
     datatype Stmt =   Assign of string * Exp
                     | Print of Exp
 
-    datatype Prog = Insts of Stm list
 
 end

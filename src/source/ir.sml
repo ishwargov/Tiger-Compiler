@@ -1,13 +1,16 @@
 structure IR : sig
-  type inst = (Mips.Label, Temp.temp) MIPS.Inst
-  type stmt = (Mips.Label, Temp.temp) MIPS.Stmt
+  type inst = (MIPS.Label, MIPS.Reg) MIPS.Inst
+  type stmt = (MIPS.Label, MIPS.Reg) MIPS.Stmt
   type prog = stmt list
   val ppInst : inst -> string
   val ppStmt : stmt -> string
   val pp     : prog -> string
 end = struct
-    val ppInst x = MIPS.prInst(x)
-    val ppStmt x = MIPS.prStmt(x)
-    val pp [] = "\n"
-      | pp (x::xs) = ppStmt(x)^"\n"^pp(xs)
+  type inst = (MIPS.Label, MIPS.Reg) MIPS.Inst
+  type stmt = (MIPS.Label, MIPS.Reg) MIPS.Stmt
+  type prog = stmt list
+  fun ppInst (x:inst) = MIPS.prInst(x)
+  fun ppStmt (x:stmt) = MIPS.prStmt(x)
+  fun pp ([]:prog) = "\n"
+    | pp (x::xs) = ppStmt(x)^"\n"^pp(xs)
 end

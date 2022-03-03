@@ -52,7 +52,7 @@ val newlineCount = List.length o List.filter (fn x => x = #"\n") o String.explod
 
 %%
 
-%header (functor TigerLexFun(structure Tokens : Tiger_TOKEN));
+%header (functor TigerLexFun(structure Tokens : Tiger_TOKENS));
 ws    = [\ \t];
 digit = [0-9];
 alph = [a-zA-Z];
@@ -65,9 +65,9 @@ alph = [a-zA-Z];
 		   in updateLine (newlineCount yytext); Tokens.NEWLINE (old, !lineRef)
 		   end
 		 );
-{alph}+       => ( Tokens.VAR  (!lineRef,!lineRef) );
+{alph}+       => ( Tokens.VAR  (yytext,!lineRef,!lineRef) );
 ":="          => ( Tokens.ASSIGN  (!lineRef,!lineRef) );
-"print"       => ( Tokens.PRINT (!lineRef,!lineRef)  )
+"print"       => ( Tokens.PRINT (!lineRef,!lineRef)  );
 {digit}+      => ( Tokens.CONST (toInt yytext, !lineRef, !lineRef) );
 "+"           => ( Tokens.PLUS  (!lineRef,!lineRef) );
 "-"           => ( Tokens.MINUS  (!lineRef,!lineRef) );

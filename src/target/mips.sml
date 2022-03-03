@@ -72,7 +72,6 @@ datatype ('l,'t) Inst = Abs of 't * 't
                       | Bge of 't * 't * 'l 
                       | Bgeu of 't * 't * 'l 
                       | Bgez of 't * 'l 
-                      | Bgezal of 't * 'l 
                       | Bgt of 't * 't * 'l 
                       | Bgtu of 't * 't * 'l 
                       | Bgtz of 't * 'l
@@ -130,16 +129,17 @@ datatype ('l,'t) Stmt = Instr of ('l,'t) Inst
                       | Byte of int list
                       | Data 
                       | Extern of int * int
-                      | Global of int 
+                      | Global of string 
                       | Half of int list
                       | Kdata
                       | Ktext
                       | Space of int
                       | Text
                       | Word of int list
+                      | Main
 
 
-(* fun prReg r = case r of 
+fun prReg r = case r of 
                 Zero => "$zero"
               | GP => "$gp"
               | SP => "$sp"
@@ -148,9 +148,9 @@ datatype ('l,'t) Stmt = Instr of ('l,'t) Inst
               | V(x) => "$v"^Int.toString(x)
               | A(x) => "$a"^Int.toString(x)
               | T(x) => "$t"^Int.toString(x)
-              | S(x) => "$s"^Int.toString(x) *)
+              | S(x) => "$s"^Int.toString(x) 
 
-fun prReg t = "$t"^Int.toString(t)
+(* fun prReg t = "$t"^Int.toString(t) *)
 
 datatype Label = UserDefined of string 
                | TempLabel   of int 
@@ -284,13 +284,14 @@ fun prStmt(stm : (Label,Reg) Stmt) = case stm of
                                       | Byte(lis) => ".byte "^prLis(lis)^"\n"
                                       | Data => ".data \n" 
                                       | Extern(sym,size) => ".extern "^Int.toString(sym)^" "^Int.toString(size)^"\n"
-                                      | Global(sym) => ".globl "^Int.toString(sym)^"\n"
+                                      | Global(sym) => ".globl "^sym^"\n"
                                       | Half(lis) => ".half "^prLis(lis)^"\n"
                                       | Kdata => ".kdata \n"
                                       | Ktext => ".ktext \n"
                                       | Space(n) => ".space "^Int.toString(n)^"\n"
                                       | Text => ".text \n"
                                       | Word(lis) => ".word "^prLis(lis)^"\n"
+                                      | Main => "main :\n"
 
 
 end

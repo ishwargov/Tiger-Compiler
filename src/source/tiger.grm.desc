@@ -1,0 +1,304 @@
+
+state 0:
+
+	PROGRAM : . STMTS 
+	PROGRAM : . STMTS NEWLINE 
+
+	VAR	shift 4
+	PRINT	shift 3
+
+	STMT	goto 2
+	STMTS	goto 1
+	PROGRAM	goto 23
+
+	.	reduce by rule 2
+
+
+state 1:
+
+	PROGRAM : STMTS .  (reduce by rule 0)
+	PROGRAM : STMTS . NEWLINE 
+
+	NEWLINE	shift 5
+
+
+	.	reduce by rule 0
+
+
+state 2:
+
+	STMTS : STMT . NEWLINE STMTS 
+
+	NEWLINE	shift 6
+
+
+	.	error
+
+
+state 3:
+
+	STMT : PRINT . EXP 
+
+	CONST	shift 10
+	VAR	shift 9
+	OPBRAC	shift 8
+
+	EXP	goto 7
+
+	.	error
+
+
+state 4:
+
+	STMT : VAR . EXP 
+
+	CONST	shift 10
+	VAR	shift 9
+	OPBRAC	shift 8
+
+	EXP	goto 11
+
+	.	error
+
+
+state 5:
+
+	PROGRAM : STMTS NEWLINE .  (reduce by rule 1)
+
+
+
+	.	reduce by rule 1
+
+
+state 6:
+
+	STMTS : STMT NEWLINE . STMTS 
+
+	VAR	shift 4
+	PRINT	shift 3
+
+	STMT	goto 2
+	STMTS	goto 12
+
+	.	reduce by rule 2
+
+
+state 7:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+	STMT : PRINT EXP .  (reduce by rule 5)
+
+	PLUS	shift 16
+	MINUS	shift 15
+	MUL	shift 14
+	DIV	shift 13
+
+
+	.	reduce by rule 5
+
+
+state 8:
+
+	EXP : OPBRAC . EXP CLBRAC 
+
+	CONST	shift 10
+	VAR	shift 9
+	OPBRAC	shift 8
+
+	EXP	goto 17
+
+	.	error
+
+
+state 9:
+
+	EXP : VAR .  (reduce by rule 7)
+
+
+
+	.	reduce by rule 7
+
+
+state 10:
+
+	EXP : CONST .  (reduce by rule 6)
+
+
+
+	.	reduce by rule 6
+
+
+state 11:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+	STMT : VAR EXP .  (reduce by rule 4)
+
+	PLUS	shift 16
+	MINUS	shift 15
+	MUL	shift 14
+	DIV	shift 13
+
+
+	.	reduce by rule 4
+
+
+state 12:
+
+	STMTS : STMT NEWLINE STMTS .  (reduce by rule 3)
+
+
+
+	.	reduce by rule 3
+
+
+state 13:
+
+	EXP : EXP DIV . EXP 
+
+	CONST	shift 10
+	VAR	shift 9
+	OPBRAC	shift 8
+
+	EXP	goto 18
+
+	.	error
+
+
+state 14:
+
+	EXP : EXP MUL . EXP 
+
+	CONST	shift 10
+	VAR	shift 9
+	OPBRAC	shift 8
+
+	EXP	goto 19
+
+	.	error
+
+
+state 15:
+
+	EXP : EXP MINUS . EXP 
+
+	CONST	shift 10
+	VAR	shift 9
+	OPBRAC	shift 8
+
+	EXP	goto 20
+
+	.	error
+
+
+state 16:
+
+	EXP : EXP PLUS . EXP 
+
+	CONST	shift 10
+	VAR	shift 9
+	OPBRAC	shift 8
+
+	EXP	goto 21
+
+	.	error
+
+
+state 17:
+
+	EXP : EXP . PLUS EXP 
+	EXP : OPBRAC EXP . CLBRAC 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+
+	PLUS	shift 16
+	MINUS	shift 15
+	MUL	shift 14
+	DIV	shift 13
+	CLBRAC	shift 22
+
+
+	.	error
+
+
+state 18:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+	EXP : EXP DIV EXP .  (reduce by rule 12)
+
+
+
+	.	reduce by rule 12
+
+
+state 19:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP MUL EXP .  (reduce by rule 11)
+	EXP : EXP . DIV EXP 
+
+
+
+	.	reduce by rule 11
+
+
+state 20:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP MINUS EXP .  (reduce by rule 10)
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+
+	MUL	shift 14
+	DIV	shift 13
+
+
+	.	reduce by rule 10
+
+
+state 21:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP PLUS EXP .  (reduce by rule 8)
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+
+	MUL	shift 14
+	DIV	shift 13
+
+
+	.	reduce by rule 8
+
+
+state 22:
+
+	EXP : OPBRAC EXP CLBRAC .  (reduce by rule 9)
+
+
+
+	.	reduce by rule 9
+
+
+state 23:
+
+
+	EOF	accept
+
+
+	.	error
+
+25 of 69 action table entries left after compaction
+12 goto table entries
