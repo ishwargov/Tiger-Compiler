@@ -26,4 +26,8 @@ li $v0, 4
 
 syscall
 
+li $a0, 10
+
+syscall
+
 

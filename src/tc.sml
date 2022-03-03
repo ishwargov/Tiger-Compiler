@@ -57,7 +57,7 @@ fun print_error (s,i:int,_) = TextIO.output(TextIO.stdErr,
 					    "Error, line " ^ (Int.toString i) ^ ", " ^ s ^ "\n")
 
 val (program,_) = TigerParser.parse (0,thisLexer,print_error,()) (* parsing *)
-val executable  = [MIPS.Global("main"),MIPS.Main] @ (TRANSLATE.compile program)                    (* compiling/code generation *)
+val executable  = [MIPS.Global("main"),MIPS.Main] @ (TRANSLATE.compile program) @ [MIPS.Instr(MIPS.Li(MIPS.A(0),10)),MIPS.Instr(MIPS.Syscall)] (* compiling/code generation *)
 val exec_str 	= IR.pp(executable)
 val _           = TextIO.output(TextIO.stdOut, exec_str)
 			       (* writing out the executable (in this case rp expression ) *)
