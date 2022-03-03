@@ -35,8 +35,11 @@ fun tAssign (Tmp:TEMP.temp) (Exp:TIGER.Exp) = case Exp of
                                                     in l1 @ l2 @ [MIPS.And(TEMP.newTemp(),u,v)]
 
 fun tPrint (Tmp:TEMP.temp) (Exp:TIGER.Exp) = case Exp of 
-                  TIGER.Val(x) = [MIPS.Li(MIPS.A(0),x),MIPS.Li(MIPS.V(0),4),MIPS.Syscall]                          
+                  TIGER.Val(x) = [MIPS.Li(MIPS.A(0),x),MIPS.Li(MIPS.V(0),4),MIPS.Syscall]   
+     
 
+
+     
 end
 
 (*
