@@ -9,7 +9,7 @@ state 0:
 
 	STMT	goto 2
 	STMTS	goto 1
-	PROGRAM	goto 23
+	PROGRAM	goto 24
 
 	.	reduce by rule 2
 
@@ -50,13 +50,10 @@ state 3:
 
 state 4:
 
-	STMT : VAR . EXP 
+	STMT : VAR . ASSIGN EXP 
 
-	CONST	shift 10
-	VAR	shift 9
-	OPBRAC	shift 8
+	ASSIGN	shift 11
 
-	EXP	goto 11
 
 	.	error
 
@@ -133,19 +130,15 @@ state 10:
 
 state 11:
 
-	EXP : EXP . PLUS EXP 
-	EXP : EXP . MINUS EXP 
-	EXP : EXP . MUL EXP 
-	EXP : EXP . DIV EXP 
-	STMT : VAR EXP .  (reduce by rule 4)
+	STMT : VAR ASSIGN . EXP 
 
-	PLUS	shift 16
-	MINUS	shift 15
-	MUL	shift 14
-	DIV	shift 13
+	CONST	shift 10
+	VAR	shift 9
+	OPBRAC	shift 8
 
+	EXP	goto 18
 
-	.	reduce by rule 4
+	.	error
 
 
 state 12:
@@ -165,7 +158,7 @@ state 13:
 	VAR	shift 9
 	OPBRAC	shift 8
 
-	EXP	goto 18
+	EXP	goto 19
 
 	.	error
 
@@ -178,7 +171,7 @@ state 14:
 	VAR	shift 9
 	OPBRAC	shift 8
 
-	EXP	goto 19
+	EXP	goto 20
 
 	.	error
 
@@ -191,7 +184,7 @@ state 15:
 	VAR	shift 9
 	OPBRAC	shift 8
 
-	EXP	goto 20
+	EXP	goto 21
 
 	.	error
 
@@ -204,15 +197,15 @@ state 16:
 	VAR	shift 9
 	OPBRAC	shift 8
 
-	EXP	goto 21
+	EXP	goto 22
 
 	.	error
 
 
 state 17:
 
-	EXP : EXP . PLUS EXP 
 	EXP : OPBRAC EXP . CLBRAC 
+	EXP : EXP . PLUS EXP 
 	EXP : EXP . MINUS EXP 
 	EXP : EXP . MUL EXP 
 	EXP : EXP . DIV EXP 
@@ -221,13 +214,30 @@ state 17:
 	MINUS	shift 15
 	MUL	shift 14
 	DIV	shift 13
-	CLBRAC	shift 22
+	CLBRAC	shift 23
 
 
 	.	error
 
 
 state 18:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+	STMT : VAR ASSIGN EXP .  (reduce by rule 4)
+
+	PLUS	shift 16
+	MINUS	shift 15
+	MUL	shift 14
+	DIV	shift 13
+
+
+	.	reduce by rule 4
+
+
+state 19:
 
 	EXP : EXP . PLUS EXP 
 	EXP : EXP . MINUS EXP 
@@ -240,7 +250,7 @@ state 18:
 	.	reduce by rule 12
 
 
-state 19:
+state 20:
 
 	EXP : EXP . PLUS EXP 
 	EXP : EXP . MINUS EXP 
@@ -253,7 +263,7 @@ state 19:
 	.	reduce by rule 11
 
 
-state 20:
+state 21:
 
 	EXP : EXP . PLUS EXP 
 	EXP : EXP . MINUS EXP 
@@ -268,10 +278,10 @@ state 20:
 	.	reduce by rule 10
 
 
-state 21:
+state 22:
 
 	EXP : EXP . PLUS EXP 
-	EXP : EXP PLUS EXP .  (reduce by rule 8)
+	EXP : EXP PLUS EXP .  (reduce by rule 9)
 	EXP : EXP . MINUS EXP 
 	EXP : EXP . MUL EXP 
 	EXP : EXP . DIV EXP 
@@ -280,19 +290,19 @@ state 21:
 	DIV	shift 13
 
 
-	.	reduce by rule 8
-
-
-state 22:
-
-	EXP : OPBRAC EXP CLBRAC .  (reduce by rule 9)
-
-
-
 	.	reduce by rule 9
 
 
 state 23:
+
+	EXP : OPBRAC EXP CLBRAC .  (reduce by rule 8)
+
+
+
+	.	reduce by rule 8
+
+
+state 24:
 
 
 	EOF	accept
@@ -300,5 +310,5 @@ state 23:
 
 	.	error
 
-25 of 69 action table entries left after compaction
+26 of 71 action table entries left after compaction
 12 goto table entries

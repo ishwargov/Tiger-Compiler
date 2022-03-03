@@ -20,50 +20,53 @@ local open LrTable in
 val table=let val actionRows =
 "\
 \\001\000\001\000\012\000\002\000\011\000\010\000\010\000\000\000\
+\\001\000\003\000\013\000\000\000\
 \\001\000\004\000\018\000\005\000\017\000\006\000\016\000\007\000\015\000\
-\\011\000\024\000\000\000\
+\\011\000\025\000\000\000\
 \\001\000\008\000\000\000\000\000\
 \\001\000\009\000\008\000\000\000\
-\\026\000\009\000\007\000\000\000\
-\\027\000\000\000\
-\\028\000\002\000\006\000\012\000\005\000\000\000\
-\\029\000\000\000\
-\\030\000\004\000\018\000\005\000\017\000\006\000\016\000\007\000\015\000\000\000\
+\\027\000\009\000\007\000\000\000\
+\\028\000\000\000\
+\\029\000\002\000\006\000\012\000\005\000\000\000\
+\\030\000\000\000\
 \\031\000\004\000\018\000\005\000\017\000\006\000\016\000\007\000\015\000\000\000\
-\\032\000\000\000\
+\\032\000\004\000\018\000\005\000\017\000\006\000\016\000\007\000\015\000\000\000\
 \\033\000\000\000\
-\\034\000\006\000\016\000\007\000\015\000\000\000\
+\\034\000\000\000\
 \\035\000\000\000\
 \\036\000\006\000\016\000\007\000\015\000\000\000\
-\\037\000\000\000\
+\\037\000\006\000\016\000\007\000\015\000\000\000\
 \\038\000\000\000\
+\\039\000\000\000\
 \"
 val actionRowNumbers =
-"\006\000\004\000\003\000\000\000\
-\\000\000\005\000\006\000\009\000\
-\\000\000\011\000\010\000\008\000\
-\\007\000\000\000\000\000\000\000\
-\\000\000\001\000\016\000\015\000\
-\\014\000\012\000\013\000\002\000"
+"\007\000\005\000\004\000\000\000\
+\\001\000\006\000\007\000\010\000\
+\\000\000\012\000\011\000\000\000\
+\\008\000\000\000\000\000\000\000\
+\\000\000\002\000\009\000\017\000\
+\\016\000\015\000\014\000\013\000\
+\\003\000"
 val gotoT =
 "\
-\\002\000\002\000\003\000\001\000\004\000\023\000\000\000\
+\\002\000\002\000\003\000\001\000\004\000\024\000\000\000\
 \\000\000\
 \\000\000\
 \\001\000\007\000\000\000\
-\\001\000\011\000\000\000\
+\\000\000\
 \\000\000\
 \\002\000\002\000\003\000\012\000\000\000\
 \\000\000\
 \\001\000\017\000\000\000\
 \\000\000\
 \\000\000\
-\\000\000\
-\\000\000\
 \\001\000\018\000\000\000\
+\\000\000\
 \\001\000\019\000\000\000\
 \\001\000\020\000\000\000\
 \\001\000\021\000\000\000\
+\\001\000\022\000\000\000\
+\\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
@@ -72,7 +75,7 @@ val gotoT =
 \\000\000\
 \\000\000\
 \"
-val numstates = 24
+val numstates = 25
 val numrules = 13
 val s = ref "" and index = ref 0
 val string_to_int = fn () => 
@@ -179,55 +182,55 @@ val actions =
 fn (i392,defaultPos,stack,
     (()):arg) =>
 case (i392,stack)
-of  ( 0, ( ( _, ( MlyValue.STMTS STMTS, STMTS1left, STMTS1right)) :: rest671)) => let val  result = MlyValue.PROGRAM ((*#line 49.33 "tiger.grm"*) STMTS (*#line 182.1 "tiger.grm.sml"*)
+of  ( 0, ( ( _, ( MlyValue.STMTS STMTS, STMTS1left, STMTS1right)) :: rest671)) => let val  result = MlyValue.PROGRAM ((*#line 49.33 "tiger.grm"*) STMTS (*#line 185.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 3, ( result, STMTS1left, STMTS1right), rest671)
 end
-|  ( 1, ( ( _, ( _, _, NEWLINE1right)) :: ( _, ( MlyValue.STMTS STMTS, STMTS1left, _)) :: rest671)) => let val  result = MlyValue.PROGRAM ((*#line 50.27 "tiger.grm"*) STMTS (*#line 186.1 "tiger.grm.sml"*)
+|  ( 1, ( ( _, ( _, _, NEWLINE1right)) :: ( _, ( MlyValue.STMTS STMTS, STMTS1left, _)) :: rest671)) => let val  result = MlyValue.PROGRAM ((*#line 50.27 "tiger.grm"*) STMTS (*#line 189.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 3, ( result, STMTS1left, NEWLINE1right), rest671)
 end
-|  ( 2, ( rest671)) => let val  result = MlyValue.STMTS ((*#line 52.34 "tiger.grm"*) []                  (*#line 190.1 "tiger.grm.sml"*)
+|  ( 2, ( rest671)) => let val  result = MlyValue.STMTS ((*#line 52.34 "tiger.grm"*) []                  (*#line 193.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 2, ( result, defaultPos, defaultPos), rest671)
 end
-|  ( 3, ( ( _, ( MlyValue.STMTS STMTS, _, STMTS1right)) :: _ :: ( _, ( MlyValue.STMT STMT, STMT1left, _)) :: rest671)) => let val  result = MlyValue.STMTS ((*#line 53.28 "tiger.grm"*) STMT :: STMTS         (*#line 194.1 "tiger.grm.sml"*)
+|  ( 3, ( ( _, ( MlyValue.STMTS STMTS, _, STMTS1right)) :: _ :: ( _, ( MlyValue.STMT STMT, STMT1left, _)) :: rest671)) => let val  result = MlyValue.STMTS ((*#line 53.28 "tiger.grm"*) STMT :: STMTS         (*#line 197.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 2, ( result, STMT1left, STMTS1right), rest671)
 end
-|  ( 4, ( ( _, ( MlyValue.EXP EXP, _, EXP1right)) :: ( _, ( MlyValue.VAR VAR, VAR1left, _)) :: rest671)) => let val  result = MlyValue.STMT ((*#line 55.31 "tiger.grm"*) TIGER.Assign(VAR,EXP)(*#line 198.1 "tiger.grm.sml"*)
+|  ( 4, ( ( _, ( MlyValue.EXP EXP, _, EXP1right)) :: _ :: ( _, ( MlyValue.VAR VAR, VAR1left, _)) :: rest671)) => let val  result = MlyValue.STMT ((*#line 55.38 "tiger.grm"*) TIGER.Assign(VAR,EXP)(*#line 201.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 1, ( result, VAR1left, EXP1right), rest671)
 end
-|  ( 5, ( ( _, ( MlyValue.EXP EXP, _, EXP1right)) :: ( _, ( _, PRINT1left, _)) :: rest671)) => let val  result = MlyValue.STMT ((*#line 56.32 "tiger.grm"*)TIGER.Print(EXP)(*#line 202.1 "tiger.grm.sml"*)
+|  ( 5, ( ( _, ( MlyValue.EXP EXP, _, EXP1right)) :: ( _, ( _, PRINT1left, _)) :: rest671)) => let val  result = MlyValue.STMT ((*#line 56.32 "tiger.grm"*)TIGER.Print(EXP)(*#line 205.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 1, ( result, PRINT1left, EXP1right), rest671)
 end
-|  ( 6, ( ( _, ( MlyValue.CONST CONST, CONST1left, CONST1right)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 58.33 "tiger.grm"*) TIGER.Val(CONST)     (*#line 206.1 "tiger.grm.sml"*)
+|  ( 6, ( ( _, ( MlyValue.CONST CONST, CONST1left, CONST1right)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 58.33 "tiger.grm"*) TIGER.Val(CONST)     (*#line 209.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 0, ( result, CONST1left, CONST1right), rest671)
 end
-|  ( 7, ( ( _, ( MlyValue.VAR VAR, VAR1left, VAR1right)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 59.34 "tiger.grm"*)TIGER.Var(VAR)(*#line 210.1 "tiger.grm.sml"*)
+|  ( 7, ( ( _, ( MlyValue.VAR VAR, VAR1left, VAR1right)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 59.34 "tiger.grm"*)TIGER.Var(VAR)(*#line 213.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 0, ( result, VAR1left, VAR1right), rest671)
 end
-|  ( 8, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 60.29 "tiger.grm"*) TIGER.Exp(EXP1,TIGER.Plus,EXP2) (*#line 214.1 "tiger.grm.sml"*)
-)
- in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
-end
-|  ( 9, ( ( _, ( _, _, CLBRAC1right)) :: ( _, ( MlyValue.EXP EXP, _, _)) :: ( _, ( _, OPBRAC1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 61.29 "tiger.grm"*) EXP (*#line 218.1 "tiger.grm.sml"*)
+|  ( 8, ( ( _, ( _, _, CLBRAC1right)) :: ( _, ( MlyValue.EXP EXP, _, _)) :: ( _, ( _, OPBRAC1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 60.29 "tiger.grm"*) EXP (*#line 217.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 0, ( result, OPBRAC1left, CLBRAC1right), rest671)
 end
-|  ( 10, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 62.26 "tiger.grm"*) TIGER.Exp(EXP1,TIGER.Minus,EXP2) (*#line 222.1 "tiger.grm.sml"*)
+|  ( 9, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 61.29 "tiger.grm"*) TIGER.Exp(EXP1,TIGER.Plus,EXP2) (*#line 221.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 11, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 63.26 "tiger.grm"*) TIGER.Exp(EXP1,TIGER.Mul,EXP2) (*#line 226.1 "tiger.grm.sml"*)
+|  ( 10, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 62.26 "tiger.grm"*) TIGER.Exp(EXP1,TIGER.Minus,EXP2) (*#line 225.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 12, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 64.29 "tiger.grm"*) TIGER.Exp(EXP1,TIGER.Div,EXP2)(*#line 230.1 "tiger.grm.sml"*)
+|  ( 11, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 63.26 "tiger.grm"*) TIGER.Exp(EXP1,TIGER.Mul,EXP2) (*#line 229.1 "tiger.grm.sml"*)
+)
+ in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
+end
+|  ( 12, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP ((*#line 64.29 "tiger.grm"*) TIGER.Exp(EXP1,TIGER.Div,EXP2)(*#line 233.1 "tiger.grm.sml"*)
 )
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
