@@ -56,6 +56,7 @@ STMT :  VAR EXP              ( TIGER.Assign(VAR,EXP))
     | PRINT EXP               (TIGER.Print(EXP))
 
 EXP     : CONST                ( TIGER.Val(CONST)     )
+    | VAR                       (TIGER.Var(VAR))
     | EXP PLUS EXP         ( TIGER.Exp(EXP1,TIGER.Plus,EXP2) )
     | OPBRAC EXP CLBRAC    ( EXP )
 	| EXP MINUS EXP        ( TIGER.Exp(EXP1,TIGER.Minus,EXP2) )

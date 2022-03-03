@@ -38,7 +38,12 @@ fun tPrint (Tmp:TEMP.temp) (Exp:TIGER.Exp) = case Exp of
                   TIGER.Val(x) = [MIPS.Li(MIPS.A(0),x),MIPS.Li(MIPS.V(0),4),MIPS.Syscall]   
      
 
+fun compileStmt (TIGER.Assign(x,e)) = tAssign (Temp.newTemp()) e
+  | compileStmt (TIGER.Print(e)) = tPrint (Temp.newTemp()) e
 
+
+fun compile []        = []
+  | compile (x :: xs) = compileStmt x @ compile xs
      
 end
 
