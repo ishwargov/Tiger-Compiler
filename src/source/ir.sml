@@ -12,5 +12,5 @@ end = struct
   fun ppInst (x:inst) = MIPS.prInst(x)
   fun ppStmt (x:stmt) = MIPS.prStmt(x)
   fun pp ([]:prog) = "\n"
-    | pp (x::xs) = ppStmt(x)^"\n"^pp(xs)
+    | pp (x::xs) = ppStmt(x)^pp(xs)
 end

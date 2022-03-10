@@ -15,6 +15,10 @@ it is empty *)
     | OPBRAC
     | CLBRAC
     | PRINT
+    | FOR
+    | DO
+    | DONE
+    | TO
 
 (* The nonterminals of the language *)
 %nonterm EXP     of TIGER.Exp
@@ -52,8 +56,9 @@ PROGRAM : STMTS                ( STMTS )
 STMTS    : (* empty *)       ( []                       )
 	| STMT NEWLINE STMTS     ( STMT :: STMTS            )
 
-STMT :  VAR ASSIGN  EXP       ( TIGER.Assign(VAR,EXP)   )
+STMT :  VAR ASSIGN EXP       ( TIGER.Assign(VAR,EXP)   )
     | PRINT EXP               ( TIGER.Print(EXP)         )
+    | FOR VAR ASSIGN EXP TO EXP DO STMTS DONE   (TIGER.For(VAR,EXP,EXP,STMTS))
 
 EXP     : CONST            ( TIGER.Val(CONST)           )
     | VAR                  ( TIGER.Var(VAR)             )

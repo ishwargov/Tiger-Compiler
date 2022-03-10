@@ -11,6 +11,9 @@ datatype Reg =  Zero
              |  FP
              |  RA
 
+datatype Label = UserDefined of string 
+               | TempLabel   of int 
+
 datatype ('l,'t) Inst = Abs of 't * 't                     
                       | Add of 't * 't * 't
                       | Addi of 't * 't * int
@@ -136,7 +139,7 @@ datatype ('l,'t) Stmt = Instr of ('l,'t) Inst
                       | Space of int
                       | Text
                       | Word of int list
-                      | Main
+                      | LabelStmt of Label
 
 
 fun prReg r = case r of 
@@ -152,8 +155,6 @@ fun prReg r = case r of
 
 (* fun prReg t = "$t"^Int.toString(t) *)
 
-datatype Label = UserDefined of string 
-               | TempLabel   of int 
 
 fun prLabel (l:Label) = case l of
                         UserDefined(x) => x
@@ -291,7 +292,7 @@ fun prStmt(stm : (Label,Reg) Stmt) = case stm of
                                       | Space(n) => ".space "^Int.toString(n)^"\n"
                                       | Text => ".text \n"
                                       | Word(lis) => ".word "^prLis(lis)^"\n"
-                                      | Main => "main :\n"
+                                      | LabelStmt(x) => prLabel(x)^" :\n"
 
 
 end
