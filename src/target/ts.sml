@@ -37,35 +37,35 @@ fun tAssign (Vmap:Env) (Tmp:TEMP.temp) (Exp:TIGER.Exp) = case Exp of
                                                     end
 
 fun tPrint (Vmap:Env) (Tmp:TEMP.temp) (Exp:TIGER.Exp) = case Exp of 
-                  TIGER.Val(x) => [MIPS.Li(MIPS.A(0),x),MIPS.Li(MIPS.V(0),4),MIPS.Syscall] 
-                | TIGER.Var(x) => [MIPS.Move(MIPS.A(0),TEMP.tempToReg(valOf(AtomMap.find(!Vmap,(Atom.atom x) )))),MIPS.Li(MIPS.V(0),4),MIPS.Syscall] 
+                  TIGER.Val(x) => [MIPS.Li(MIPS.A(0),x),MIPS.Li(MIPS.V(0),1),MIPS.Syscall] 
+                | TIGER.Var(x) => [MIPS.Move(MIPS.A(0),TEMP.tempToReg(valOf(AtomMap.find(!Vmap,(Atom.atom x) )))),MIPS.Li(MIPS.V(0),1),MIPS.Syscall] 
                 | TIGER.Exp(e1,TIGER.Plus,e2) => let 
                                                     val u = TEMP.newTemp()
                                                     val v = TEMP.newTemp()
                                                     val l1 = tAssign Vmap u e1
                                                     val l2 = tAssign Vmap v e2
-                                                    in (l1 @ l2 @ [MIPS.Add(TEMP.tempToReg(Tmp),TEMP.tempToReg(u),TEMP.tempToReg(v)),MIPS.Move(MIPS.A(0),TEMP.tempToReg(Tmp)),MIPS.Li(MIPS.V(0),4),MIPS.Syscall])
+                                                    in (l1 @ l2 @ [MIPS.Add(TEMP.tempToReg(Tmp),TEMP.tempToReg(u),TEMP.tempToReg(v)),MIPS.Move(MIPS.A(0),TEMP.tempToReg(Tmp)),MIPS.Li(MIPS.V(0),1),MIPS.Syscall])
                                                     end
                   | TIGER.Exp(e1,TIGER.Minus,e2) =>  let 
                                                     val u = TEMP.newTemp()
                                                     val v = TEMP.newTemp()
                                                     val l1 = tAssign Vmap u e1
                                                     val l2 = tAssign Vmap v e2
-                                                    in (l1 @ l2 @ [MIPS.Sub(TEMP.tempToReg(Tmp),TEMP.tempToReg(u),TEMP.tempToReg(v)),MIPS.Move(MIPS.A(0),TEMP.tempToReg(Tmp)),MIPS.Li(MIPS.V(0),4),MIPS.Syscall])
+                                                    in (l1 @ l2 @ [MIPS.Sub(TEMP.tempToReg(Tmp),TEMP.tempToReg(u),TEMP.tempToReg(v)),MIPS.Move(MIPS.A(0),TEMP.tempToReg(Tmp)),MIPS.Li(MIPS.V(0),1),MIPS.Syscall])
                                                     end
                   | TIGER.Exp(e1,TIGER.Div,e2) =>  let 
                                                     val u = TEMP.newTemp()
                                                     val v = TEMP.newTemp()
                                                     val l1 = tAssign Vmap u e1
                                                     val l2 = tAssign Vmap v e2
-                                                    in (l1 @ l2 @ [MIPS.Divi(TEMP.tempToReg(Tmp),TEMP.tempToReg(u),TEMP.tempToReg(v)),MIPS.Move(MIPS.A(0),TEMP.tempToReg(Tmp)),MIPS.Li(MIPS.V(0),4),MIPS.Syscall])
+                                                    in (l1 @ l2 @ [MIPS.Divi(TEMP.tempToReg(Tmp),TEMP.tempToReg(u),TEMP.tempToReg(v)),MIPS.Move(MIPS.A(0),TEMP.tempToReg(Tmp)),MIPS.Li(MIPS.V(0),1),MIPS.Syscall])
                                                     end
                   | TIGER.Exp(e1,TIGER.Mul,e2) =>  let 
                                                     val u = TEMP.newTemp()
                                                     val v = TEMP.newTemp()
                                                     val l1 = tAssign Vmap u e1
                                                     val l2 = tAssign Vmap v e2
-                                                    in (l1 @ l2 @ [MIPS.Mul(TEMP.tempToReg(Tmp),TEMP.tempToReg(u),TEMP.tempToReg(v)),MIPS.Move(MIPS.A(0),TEMP.tempToReg(Tmp)),MIPS.Li(MIPS.V(0),4),MIPS.Syscall])
+                                                    in (l1 @ l2 @ [MIPS.Mul(TEMP.tempToReg(Tmp),TEMP.tempToReg(u),TEMP.tempToReg(v)),MIPS.Move(MIPS.A(0),TEMP.tempToReg(Tmp)),MIPS.Li(MIPS.V(0),1),MIPS.Syscall])
                                                     end
 
 fun compileStmt (Vmap:Env) (TIGER.Assign(x,e)) = let
