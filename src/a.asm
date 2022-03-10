@@ -1,3 +1,4 @@
+.text 
 .globl main
 main :
 li $t0, 5
@@ -12,6 +13,6 @@ add $t4, $t5, $t6
 move $a0, $t4
 li $v0, 1
 syscall
-li $a0, 10
+li $v0, 10
 syscall
 
