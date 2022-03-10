@@ -1,0 +1,409 @@
+
+state 0:
+
+	PROGRAM : . STMTS 
+	PROGRAM : . STMTS NEWLINE 
+
+	VAR	shift 5
+	PRINT	shift 4
+	FOR	shift 3
+
+	STMT	goto 2
+	STMTS	goto 1
+	PROGRAM	goto 33
+
+	.	reduce by rule 2
+
+
+state 1:
+
+	PROGRAM : STMTS .  (reduce by rule 0)
+	PROGRAM : STMTS . NEWLINE 
+
+	NEWLINE	shift 6
+
+
+	.	reduce by rule 0
+
+
+state 2:
+
+	STMTS : STMT . NEWLINE STMTS 
+
+	NEWLINE	shift 7
+
+
+	.	error
+
+
+state 3:
+
+	STMT : FOR . VAR ASSIGN CONST TO CONST DO STMTS DONE 
+
+	VAR	shift 8
+
+
+	.	error
+
+
+state 4:
+
+	STMT : PRINT . EXP 
+
+	CONST	shift 12
+	VAR	shift 11
+	OPBRAC	shift 10
+
+	EXP	goto 9
+
+	.	error
+
+
+state 5:
+
+	STMT : VAR . ASSIGN EXP 
+
+	ASSIGN	shift 13
+
+
+	.	error
+
+
+state 6:
+
+	PROGRAM : STMTS NEWLINE .  (reduce by rule 1)
+
+
+
+	.	reduce by rule 1
+
+
+state 7:
+
+	STMTS : STMT NEWLINE . STMTS 
+
+	VAR	shift 5
+	PRINT	shift 4
+	FOR	shift 3
+
+	STMT	goto 2
+	STMTS	goto 14
+
+	.	reduce by rule 2
+
+
+state 8:
+
+	STMT : FOR VAR . ASSIGN CONST TO CONST DO STMTS DONE 
+
+	ASSIGN	shift 15
+
+
+	.	error
+
+
+state 9:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+	STMT : PRINT EXP .  (reduce by rule 5)
+
+	PLUS	shift 19
+	MINUS	shift 18
+	MUL	shift 17
+	DIV	shift 16
+
+
+	.	reduce by rule 5
+
+
+state 10:
+
+	EXP : OPBRAC . EXP CLBRAC 
+
+	CONST	shift 12
+	VAR	shift 11
+	OPBRAC	shift 10
+
+	EXP	goto 20
+
+	.	error
+
+
+state 11:
+
+	EXP : VAR .  (reduce by rule 8)
+
+
+
+	.	reduce by rule 8
+
+
+state 12:
+
+	EXP : CONST .  (reduce by rule 7)
+
+
+
+	.	reduce by rule 7
+
+
+state 13:
+
+	STMT : VAR ASSIGN . EXP 
+
+	CONST	shift 12
+	VAR	shift 11
+	OPBRAC	shift 10
+
+	EXP	goto 21
+
+	.	error
+
+
+state 14:
+
+	STMTS : STMT NEWLINE STMTS .  (reduce by rule 3)
+
+
+
+	.	reduce by rule 3
+
+
+state 15:
+
+	STMT : FOR VAR ASSIGN . CONST TO CONST DO STMTS DONE 
+
+	CONST	shift 22
+
+
+	.	error
+
+
+state 16:
+
+	EXP : EXP DIV . EXP 
+
+	CONST	shift 12
+	VAR	shift 11
+	OPBRAC	shift 10
+
+	EXP	goto 23
+
+	.	error
+
+
+state 17:
+
+	EXP : EXP MUL . EXP 
+
+	CONST	shift 12
+	VAR	shift 11
+	OPBRAC	shift 10
+
+	EXP	goto 24
+
+	.	error
+
+
+state 18:
+
+	EXP : EXP MINUS . EXP 
+
+	CONST	shift 12
+	VAR	shift 11
+	OPBRAC	shift 10
+
+	EXP	goto 25
+
+	.	error
+
+
+state 19:
+
+	EXP : EXP PLUS . EXP 
+
+	CONST	shift 12
+	VAR	shift 11
+	OPBRAC	shift 10
+
+	EXP	goto 26
+
+	.	error
+
+
+state 20:
+
+	EXP : OPBRAC EXP . CLBRAC 
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+
+	PLUS	shift 19
+	MINUS	shift 18
+	MUL	shift 17
+	DIV	shift 16
+	CLBRAC	shift 27
+
+
+	.	error
+
+
+state 21:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+	STMT : VAR ASSIGN EXP .  (reduce by rule 4)
+
+	PLUS	shift 19
+	MINUS	shift 18
+	MUL	shift 17
+	DIV	shift 16
+
+
+	.	reduce by rule 4
+
+
+state 22:
+
+	STMT : FOR VAR ASSIGN CONST . TO CONST DO STMTS DONE 
+
+	TO	shift 28
+
+
+	.	error
+
+
+state 23:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+	EXP : EXP DIV EXP .  (reduce by rule 13)
+
+
+
+	.	reduce by rule 13
+
+
+state 24:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP MUL EXP .  (reduce by rule 12)
+	EXP : EXP . DIV EXP 
+
+
+
+	.	reduce by rule 12
+
+
+state 25:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP . MINUS EXP 
+	EXP : EXP MINUS EXP .  (reduce by rule 11)
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+
+	MUL	shift 17
+	DIV	shift 16
+
+
+	.	reduce by rule 11
+
+
+state 26:
+
+	EXP : EXP . PLUS EXP 
+	EXP : EXP PLUS EXP .  (reduce by rule 10)
+	EXP : EXP . MINUS EXP 
+	EXP : EXP . MUL EXP 
+	EXP : EXP . DIV EXP 
+
+	MUL	shift 17
+	DIV	shift 16
+
+
+	.	reduce by rule 10
+
+
+state 27:
+
+	EXP : OPBRAC EXP CLBRAC .  (reduce by rule 9)
+
+
+
+	.	reduce by rule 9
+
+
+state 28:
+
+	STMT : FOR VAR ASSIGN CONST TO . CONST DO STMTS DONE 
+
+	CONST	shift 29
+
+
+	.	error
+
+
+state 29:
+
+	STMT : FOR VAR ASSIGN CONST TO CONST . DO STMTS DONE 
+
+	DO	shift 30
+
+
+	.	error
+
+
+state 30:
+
+	STMT : FOR VAR ASSIGN CONST TO CONST DO . STMTS DONE 
+
+	VAR	shift 5
+	PRINT	shift 4
+	FOR	shift 3
+
+	STMT	goto 2
+	STMTS	goto 31
+
+	.	reduce by rule 2
+
+
+state 31:
+
+	STMT : FOR VAR ASSIGN CONST TO CONST DO STMTS . DONE 
+
+	DONE	shift 32
+
+
+	.	error
+
+
+state 32:
+
+	STMT : FOR VAR ASSIGN CONST TO CONST DO STMTS DONE .  (reduce by rule 6)
+
+
+
+	.	reduce by rule 6
+
+
+state 33:
+
+
+	EOF	accept
+
+
+	.	error
+
+34 of 92 action table entries left after compaction
+14 goto table entries

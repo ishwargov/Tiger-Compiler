@@ -13,7 +13,7 @@ struct
 
     datatype Stmt =   Assign of string * Exp
                     | Print of Exp
-                    | For of Var * Val * Val * Stmt list
+                    | For of string * int * int * Stmt list
 
 
 end

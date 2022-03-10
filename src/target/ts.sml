@@ -70,13 +70,35 @@ fun tPrint (Vmap:Env) (Tmp:TEMP.temp) (Exp:TIGER.Exp) = case Exp of
 
 fun compileStmt (Vmap:Env) (TIGER.Assign(x,e)) = let
                                         val t1 = TEMP.newTemp()
-                                      in (Vmap := AtomMap.insert(!Vmap,(Atom.atom x),t1); tAssign Vmap t1 e)
+                                      in (Vmap := AtomMap.insert(!Vmap,(Atom.atom x),t1); map MIPS.Instr (tAssign Vmap t1 e))
                                       end
-  | compileStmt (Vmap:Env) (TIGER.Print(e)) = tPrint Vmap (TEMP.newTemp()) e
+  | compileStmt (Vmap:Env) (TIGER.Print(e)) = map MIPS.Instr (tPrint Vmap (TEMP.newTemp()) e)
+  | compileStmt (Vmap:Env) (TIGER.For(i,v1,v2,st)) = let 
+                                                          val l1 = TEMP.newLabel()
+                                                          val l2 = TEMP.newLabel()
+                                                          val t1 = TEMP.newTemp()
+                                                          val t2 = TEMP.newTemp()
+                                                          val Vmap_new = ref (AtomMap.insert(!Vmap,(Atom.atom i),t1))
+                                                          val s1 = map MIPS.Instr (tAssign Vmap_new t1 (TIGER.Val(v1)))
+                                                          val s2 = map MIPS.Instr (tAssign Vmap_new t2 (TIGER.Val(v2)))
+                                                          fun compileStmtLis (Vmap:Env) (x::xs) = (compileStmt Vmap x) @ (compileStmtLis Vmap xs)
+                                                          val s3 = compileStmtLis Vmap_new st
+                                                          in (
+                                                              s1
+                                                            @ s2
+                                                            @ [MIPS.LabelStmt(TEMP.labelToLabel(l1))]
+                                                            @ [MIPS.Instr(MIPS.Bgt(TEMP.tempToReg(t1),TEMP.tempToReg(t2),TEMP.labelToLabel(l2)))]
+                                                            @ s3
+                                                            @ [MIPS.Instr(MIPS.Addi(TEMP.tempToReg(t1),TEMP.tempToReg(t1),1))]
+                                                            @ [MIPS.Instr(MIPS.J(TEMP.labelToLabel(l1)))]
+                                                            @ [MIPS.LabelStmt(TEMP.labelToLabel(l2))]
+                                                          ) 
+                                                          end
+
 
 
 fun compile []        = []
-  | compile (x :: xs) = (map MIPS.Instr (compileStmt Vmap x)) @ (compile xs)
+  | compile (x :: xs) = (compileStmt Vmap x) @ (compile xs)
 end
 
 (*

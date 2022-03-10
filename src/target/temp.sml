@@ -3,6 +3,7 @@ signature TEMPS =
      type temp
      type label
      val newTemp : unit -> temp
+     val newLabel : unit -> label
      val tempToString : temp -> string
      val tempToReg : temp -> MIPS.Reg
      val labelToString : label ->  string
@@ -19,7 +20,7 @@ structure TEMP :> TEMPS = struct
    fun newTemp ()     = let val tmp = !nextTemp in (nextTemp := !nextTemp+1; tmp) end
    fun newLabel ()    = let val lab = !nextLabel in (nextLabel := !nextLabel+1; lab) end
    fun tempToString t = "$t"^Int.toString(t)
-   fun labelToString l = "$L"^Int.toString(t)
+   fun labelToString l = "$L"^Int.toString(l)
    fun tempToReg t = MIPS.T(t)
    fun labelToLabel l = MIPS.TempLabel(l)
 end

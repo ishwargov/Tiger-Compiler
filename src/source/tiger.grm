@@ -58,7 +58,7 @@ STMTS    : (* empty *)       ( []                       )
 
 STMT :  VAR ASSIGN EXP       ( TIGER.Assign(VAR,EXP)   )
     | PRINT EXP               ( TIGER.Print(EXP)         )
-    | FOR VAR ASSIGN EXP TO EXP DO STMTS DONE   (TIGER.For(VAR,EXP,EXP,STMTS))
+    | FOR VAR ASSIGN CONST TO CONST DO STMTS DONE   (TIGER.For(VAR,CONST1,CONST2,STMTS))
 
 EXP     : CONST            ( TIGER.Val(CONST)           )
     | VAR                  ( TIGER.Var(VAR)             )
