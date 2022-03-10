@@ -15,4 +15,3 @@ L1 :
 li $t4, 6
 li $v0, 10
 syscall
-

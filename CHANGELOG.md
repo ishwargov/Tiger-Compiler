@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## LAB 5
+- Changed Lexer,Grammar for FOR loop
+- Create Temporary Label Allocation
+- Added Instructions for executing FOR Loop with inner local Environment Variables
+- Added tests with FOR loop
+
 ## LAB 4
 - Added Tiger AST
 - Created IR pretty print
