@@ -81,7 +81,8 @@ fun compileStmt (Vmap:Env) (TIGER.Assign(x,e)) = let
                                                           val Vmap_new = ref (AtomMap.insert(!Vmap,(Atom.atom i),t1))
                                                           val s1 = map MIPS.Instr (tAssign Vmap_new t1 (TIGER.Val(v1)))
                                                           val s2 = map MIPS.Instr (tAssign Vmap_new t2 (TIGER.Val(v2)))
-                                                          fun compileStmtLis (Vmap:Env) (x::xs) = (compileStmt Vmap x) @ (compileStmtLis Vmap xs)
+                                                          fun compileStmtLis (Vmap:Env) [] = []
+                                                            | compileStmtLis (Vmap:Env) (x::xs) = (compileStmt Vmap x) @ (compileStmtLis Vmap xs)
                                                           val s3 = compileStmtLis Vmap_new st
                                                           in (
                                                               s1

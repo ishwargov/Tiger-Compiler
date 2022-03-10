@@ -10,7 +10,7 @@ state 0:
 
 	STMT	goto 2
 	STMTS	goto 1
-	PROGRAM	goto 33
+	PROGRAM	goto 35
 
 	.	reduce by rule 2
 
@@ -38,7 +38,7 @@ state 2:
 
 state 3:
 
-	STMT : FOR . VAR ASSIGN CONST TO CONST DO STMTS DONE 
+	STMT : FOR . VAR ASSIGN CONST TO CONST NEWLINE DO NEWLINE STMTS DONE 
 
 	VAR	shift 8
 
@@ -94,7 +94,7 @@ state 7:
 
 state 8:
 
-	STMT : FOR VAR . ASSIGN CONST TO CONST DO STMTS DONE 
+	STMT : FOR VAR . ASSIGN CONST TO CONST NEWLINE DO NEWLINE STMTS DONE 
 
 	ASSIGN	shift 15
 
@@ -174,7 +174,7 @@ state 14:
 
 state 15:
 
-	STMT : FOR VAR ASSIGN . CONST TO CONST DO STMTS DONE 
+	STMT : FOR VAR ASSIGN . CONST TO CONST NEWLINE DO NEWLINE STMTS DONE 
 
 	CONST	shift 22
 
@@ -271,7 +271,7 @@ state 21:
 
 state 22:
 
-	STMT : FOR VAR ASSIGN CONST . TO CONST DO STMTS DONE 
+	STMT : FOR VAR ASSIGN CONST . TO CONST NEWLINE DO NEWLINE STMTS DONE 
 
 	TO	shift 28
 
@@ -346,7 +346,7 @@ state 27:
 
 state 28:
 
-	STMT : FOR VAR ASSIGN CONST TO . CONST DO STMTS DONE 
+	STMT : FOR VAR ASSIGN CONST TO . CONST NEWLINE DO NEWLINE STMTS DONE 
 
 	CONST	shift 29
 
@@ -356,9 +356,9 @@ state 28:
 
 state 29:
 
-	STMT : FOR VAR ASSIGN CONST TO CONST . DO STMTS DONE 
+	STMT : FOR VAR ASSIGN CONST TO CONST . NEWLINE DO NEWLINE STMTS DONE 
 
-	DO	shift 30
+	NEWLINE	shift 30
 
 
 	.	error
@@ -366,23 +366,19 @@ state 29:
 
 state 30:
 
-	STMT : FOR VAR ASSIGN CONST TO CONST DO . STMTS DONE 
+	STMT : FOR VAR ASSIGN CONST TO CONST NEWLINE . DO NEWLINE STMTS DONE 
 
-	VAR	shift 5
-	PRINT	shift 4
-	FOR	shift 3
+	DO	shift 31
 
-	STMT	goto 2
-	STMTS	goto 31
 
-	.	reduce by rule 2
+	.	error
 
 
 state 31:
 
-	STMT : FOR VAR ASSIGN CONST TO CONST DO STMTS . DONE 
+	STMT : FOR VAR ASSIGN CONST TO CONST NEWLINE DO . NEWLINE STMTS DONE 
 
-	DONE	shift 32
+	NEWLINE	shift 32
 
 
 	.	error
@@ -390,14 +386,38 @@ state 31:
 
 state 32:
 
-	STMT : FOR VAR ASSIGN CONST TO CONST DO STMTS DONE .  (reduce by rule 6)
+	STMT : FOR VAR ASSIGN CONST TO CONST NEWLINE DO NEWLINE . STMTS DONE 
+
+	VAR	shift 5
+	PRINT	shift 4
+	FOR	shift 3
+
+	STMT	goto 2
+	STMTS	goto 33
+
+	.	reduce by rule 2
+
+
+state 33:
+
+	STMT : FOR VAR ASSIGN CONST TO CONST NEWLINE DO NEWLINE STMTS . DONE 
+
+	DONE	shift 34
+
+
+	.	error
+
+
+state 34:
+
+	STMT : FOR VAR ASSIGN CONST TO CONST NEWLINE DO NEWLINE STMTS DONE .  (reduce by rule 6)
 
 
 
 	.	reduce by rule 6
 
 
-state 33:
+state 35:
 
 
 	EOF	accept
@@ -405,5 +425,5 @@ state 33:
 
 	.	error
 
-34 of 92 action table entries left after compaction
+36 of 96 action table entries left after compaction
 14 goto table entries

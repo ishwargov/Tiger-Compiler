@@ -65,13 +65,13 @@ alph = [a-zA-Z];
 		   in updateLine (newlineCount yytext); Tokens.NEWLINE (old, !lineRef)
 		   end
 		 );
-{alph}+       => ( Tokens.VAR  (yytext,!lineRef,!lineRef) );
-":="          => ( Tokens.ASSIGN  (!lineRef,!lineRef) );
+"do"       => ( Tokens.DO (!lineRef,!lineRef)  );
 "print "       => ( Tokens.PRINT (!lineRef,!lineRef)  );
 "for "       => ( Tokens.FOR (!lineRef,!lineRef)  );
-" to "       => ( Tokens.TO (!lineRef,!lineRef)  );
-" do "       => ( Tokens.DO (!lineRef,!lineRef)  );
-" done"       => ( Tokens.DONE (!lineRef,!lineRef)  );
+"done"       => ( Tokens.DONE (!lineRef,!lineRef)  );
+"to"       => ( Tokens.TO (!lineRef,!lineRef)  );
+{alph}+       => ( Tokens.VAR  (yytext,!lineRef,!lineRef) );
+":="          => ( Tokens.ASSIGN  (!lineRef,!lineRef) );
 {digit}+      => ( Tokens.CONST (toInt yytext, !lineRef, !lineRef) );
 "+"           => ( Tokens.PLUS  (!lineRef,!lineRef) );
 "-"           => ( Tokens.MINUS  (!lineRef,!lineRef) );

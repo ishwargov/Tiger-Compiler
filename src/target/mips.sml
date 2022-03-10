@@ -158,7 +158,7 @@ fun prReg r = case r of
 
 fun prLabel (l:Label) = case l of
                         UserDefined(x) => x
-                      | TempLabel(x) => "$L"^Int.toString(x)
+                      | TempLabel(x) => "L"^Int.toString(x)
 
 fun prInst(i : (Label,Reg) Inst) = case i of
                                         Abs(t1,t2) => "abs "^prReg(t1)^", "^prReg(t2)
