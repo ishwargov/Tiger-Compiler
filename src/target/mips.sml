@@ -295,4 +295,39 @@ fun prStmt(stm : (Label,Reg) Stmt) = case stm of
                                       | LabelStmt(x) => prLabel(x)^" :\n"
 
 
+structure MIPSInst : INST = struct  
+  type t = (Label,Reg) Stmt
+  fun isJumpLike x = case x of 
+                    Instr(B(l1)) => true
+                  | Instr(Bczt(l1)) => true 
+                  | Instr(Bczf(l1)) => true
+                  | Instr(Beq(t1,t2,l1)) => true 
+                  | Instr(Beqz(t1,l1)) => true
+                  | Instr(Bge(t1,t2,l1)) => true 
+                  | Instr(Bgeu(t1,t2,l1)) => true 
+                  | Instr(Bgez(t1,l1)) => true
+                  | Instr(Bgt(t1,t2,l1))  => true
+                  | Instr(Bgtu(t1,t2,l1))  => true
+                  | Instr(Bgtz(t1,l1))  => true
+                  | Instr(Ble(t1,t2,l1)) => true
+                  | Instr(Bleu(t1,t2,l1) ) => true
+                  | Instr(Blez(t1,l1)) => true
+                  | Instr(Bltzal(t1,l1)) => true
+                  | Instr(Blt(t1,t2,l1)) => true
+                  | Instr(Bltu(t1,t2,l1))  => true
+                  | Instr(Bltz(t1,l1)) => true
+                  | Instr(Bne(t1,t2,l1))  => true
+                  | Instr(Bnez(t1,l1)) => true
+                  | Instr(J(l1))  => true
+                  | Instr(Jal(l1))  => true
+                  | Instr(Jalr(t1))  => true
+                  | Instr(Jr(t1)) => true
+                  | _ => false
+  fun isTarget x = case x of
+                  LabelStmt(y) => true
+                | _ => false
+end 
+
+structure MIPSBasicBlocks = BasicBlocks(MIPSInst)
+
 end
