@@ -33,6 +33,6 @@ val all     : 'a graph -> node list
 
 maps, folds etc
 *)
-
+val map_g : 'a graph -> ('a -> 'b) -> 'b graph
 
 end
