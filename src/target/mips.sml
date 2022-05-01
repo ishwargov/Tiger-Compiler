@@ -295,7 +295,7 @@ fun prStmt(stm : (Label,Reg) Stmt) = case stm of
                                       | LabelStmt(x) => prLabel(x)^" :\n"
 
 
-structure MIPSInst : INST = struct  
+structure MIPSInst : INST = struct                        (* BASIC BLOCKS *)
   type t = (Label,Reg) Stmt
   fun isJumpLike x = case x of 
                     Instr(B(l1)) => true

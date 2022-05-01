@@ -1,3 +1,4 @@
+(* Direct Translation to MIPS from Tiger. IR is technically MIPS *)
 structure IR : sig
   type inst = (MIPS.Label, MIPS.Reg) MIPS.Inst
   type stmt = (MIPS.Label, MIPS.Reg) MIPS.Stmt

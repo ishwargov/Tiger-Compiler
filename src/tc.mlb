@@ -7,7 +7,11 @@ target/mips.sml
 source/tiger.sml
 target/temp.sml
 source/ir.sml
-target/ts.sml
+ir/tree.sig
+ir/tree.sml
+graph/graph.sig
+graph/graph.sml
+target/translate.sml
 source/tiger.grm.sig
 source/tiger.grm.sml
 source/tiger.lex.sml

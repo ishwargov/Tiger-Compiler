@@ -21,6 +21,6 @@ structure TEMP :> TEMPS = struct
    fun newLabel ()    = let val lab = !nextLabel in (nextLabel := !nextLabel+1; lab) end
    fun tempToString t = "$t"^Int.toString(t)
    fun labelToString l = "$L"^Int.toString(l)
-   fun tempToReg t = MIPS.T(t)
+   fun tempToReg t = MIPS.T(t)                                                (* TODO : Change to Graph coloring and Register Allocation*)
    fun labelToLabel l = MIPS.TempLabel(l)
 end
