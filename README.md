@@ -4,8 +4,8 @@ Name : Ishwar Govind
 Roll No : 111901024
 
 **Note.**
-*Makefile in the root directory is for tiger compiler.
-Makefile for reverse-polish is in reverse-polish directory.*
+*Makefile in the root directory is for tiger compiler.*
+*Makefile for reverse-polish is in reverse-polish directory.*
 
 ## DIRS
 reverse-polish/ -> contains reverse-polish lab files
