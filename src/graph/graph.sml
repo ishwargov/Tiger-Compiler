@@ -27,6 +27,17 @@ fun newNode (g : 'a graph) (x: 'a) = let
                                 !(#nextNode g)
                                 end
 
+fun addEdge (g: 'a graph) ((u,v):(node*node) )= let
+                                    val a = AtomTable.lookup (#successors g) (Atom.atom (Int.toString(u)))
+                                    val b = AtomTable.lookup (#predecessors g) (Atom.atom (Int.toString(v)))
+                                    val c = v::a
+                                    val d = u::b
+                                    val f = AtomTable.insert (#successors g) (Atom.atom (Int.toString(u)),c)
+                                    val g = AtomTable.insert (#predecessors g) (Atom.atom (Int.toString(v)),d)
+                                in
+                                    ()
+                                end
+
 
 fun succ (g: 'a graph) (n:node) = AtomTable.lookup ((#successors g):node list AtomTable.hash_table) (Atom.atom (Int.toString(n)) )
 fun pred (g: 'a graph)  (n:node) = AtomTable.lookup ((#predecessors g):node list AtomTable.hash_table) (Atom.atom (Int.toString(n)) )
