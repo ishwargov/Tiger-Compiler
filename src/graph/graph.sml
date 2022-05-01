@@ -13,9 +13,9 @@ type 'a graph = {
 exception Limit_Exceeded;
 
 fun empty () = {
-    labels = AtomTable.mkTable(10,Limit_Exceeded),
-    successors = AtomTable.mkTable(10,Limit_Exceeded),
-    predecessors = AtomTable.mkTable(10,Limit_Exceeded),
+    labels = AtomTable.mkTable(100,Limit_Exceeded),
+    successors = AtomTable.mkTable(100,Limit_Exceeded),
+    predecessors = AtomTable.mkTable(100,Limit_Exceeded),
     nextNode = ref 0
 }
 
