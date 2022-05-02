@@ -1,7 +1,9 @@
 # CHANGELOG
 
 ## LAB 7
-
+- Added Graphs Signature
+- Added Graphs Structure
+- Functions for creating graph,nodes and retrieving succ,pred
 
 ## LAB 6
 - Added BasicBlocks functor
