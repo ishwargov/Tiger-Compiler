@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## LAB 7
+- Used AtomTable.hash_table for hashtable implementation
 - Added Graphs Signature
 - Added Graphs Structure
 - Functions for creating graph,nodes and retrieving succ,pred
