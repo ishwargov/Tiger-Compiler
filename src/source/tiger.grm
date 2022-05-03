@@ -26,7 +26,7 @@ it is empty *)
        | STMTS   of TIGER.Stmt list
        | PROGRAM of TIGER.Stmt list
 
-%keyword FOR DO PRINT TO DONE 
+%keyword FOR DO PRINT TO DONE (* keywords *)
 
 %eop EOF (* What token to use as end of parsing token              *)
 %verbose (* Generates a printed form of the table in expr.grm.desc *)
