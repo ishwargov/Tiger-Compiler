@@ -16,6 +16,8 @@ src/source -> contains parser, lexer and abstract syntax tree of Tiger. \
 src/target -> contains files of MIPS, Temp Structure and Block Structure. 
 
 ## TESTING
-``` $ make  ``` </br>
-``` $ ./tc ./tests/a.tig ``` </br>
-``` $ ./tc ./tests/b.tig ``` </br>
+``` $ make  ``` 
+
+``` $ ./tc ./tests/a.tig ``` 
+
+``` $ ./tc ./tests/b.tig ``` 
