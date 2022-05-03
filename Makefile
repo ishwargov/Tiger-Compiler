@@ -1,4 +1,4 @@
-COMMON= src/source/ir.sml src/source/tiger.sml src/target/mips.sml src/target/temp.sml src/target/translate.sml
+COMMON= src/source/ir.sml src/source/tiger.sml src/target/mips.sml src/target/temp.sml src/target/translate.sml src/graph/graph.sml src/ir/tree.sml
 
 
 src/source/%.lex.sml: src/source/%.lex

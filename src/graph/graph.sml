@@ -10,12 +10,12 @@ type 'a graph = {
     nextNode : node ref
 }
 
-exception Limit_Exceeded;
+exception KeyError;
 
 fun empty () = {
-    labels = AtomTable.mkTable(100,Limit_Exceeded),
-    successors = AtomTable.mkTable(100,Limit_Exceeded),
-    predecessors = AtomTable.mkTable(100,Limit_Exceeded),
+    labels = AtomTable.mkTable(100,KeyError),
+    successors = AtomTable.mkTable(100,KeyError), 
+    predecessors = AtomTable.mkTable(100,KeyError),
     nextNode = ref 0
 }
 
