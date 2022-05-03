@@ -64,7 +64,6 @@ end
 (*
 
 
-val tb : int list AtomTable.hash_table = AtomTable.mkTable(5,Limit_Exceeded);
 AtomTable.insert tb (Atom.atom "$t1",[1,2,3,4]);  
 
 
